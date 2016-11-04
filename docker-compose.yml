@@ -1,0 +1,33 @@
+version: '2'
+volumes:
+  moodle-conf:
+  moodledata:
+  moodle-db-data:
+
+services:
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_DB: moodle
+      POSTGRES_USER: moodle
+      POSTGRES_PASSWORD: moodle
+      PGPASSWORD: moodle
+    volumes:
+     - moodle-db-data:/var/lib/postgresql/data
+
+  server:
+    image: registry.ts3corp.com.br:5000/gcavalcante8808/moodle
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: moodle
+      DB_PASS: moodle
+      DB_NAME: moodle
+      VIRTUAL_HOST: moodle.example.com
+      VIRTUAL_PORT: 80
+    volumes:
+     - moodle-conf:/var/www/html
+     - moodledata:/var/www/moodledata
+    depends_on:
+     - db
+
