@@ -16,15 +16,17 @@ services:
      - moodle-db-data:/var/lib/postgresql/data
 
   server:
-    image: registry.ts3corp.com.br:5000/gcavalcante8808/moodle
+    image: gcavalcante8808/moodle
     environment:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: moodle
       DB_PASS: moodle
       DB_NAME: moodle
+      MOODLE_VERSION: 31
       VIRTUAL_HOST: moodle.example.com
-      VIRTUAL_PORT: 80
+    ports:
+     - "80:80"
     volumes:
      - moodle-conf:/var/www/html
      - moodledata:/var/www/moodledata
