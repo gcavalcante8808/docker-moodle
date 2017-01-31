@@ -32,6 +32,21 @@ You need to install and setup an postgres database before the use of the moodle 
  * VIRTUAL_HOST: wwwroot of moodle, must match with the server access fqdn (otherwise the moodle will try to redirect you to the configured url);
  * **MOODLE_VERSION**: Moodle Version that will be installed (only numbers, no dots), if not provided assumes version 31 which corresponds to the version 3.1;
 
+Common Operations
+-----------------
+
+Some operations supported by the cli are now wrapped into the entrypoint. You can use them with the following commands:
+
+```
+    docker exec -it <server_container> /entrypoint maintenance_on #To Enable Maintenance
+    docker exec -it <server_container> /entrypoint mainteance_off #To Disable Maitenance
+    docker exec -it <server_container> /entrypoint run_cron #To Run Moodle's Cron Job
+    docker exec -it <server_container> /entrypoint update #To update the moodle to the latest version of branch. 3.0.2 will be update to 3.0.8 for example.
+```
+
+** At this time there is no support for version upgrades, just simple updates. **
+
+
 Author
 ------
 

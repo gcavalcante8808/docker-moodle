@@ -24,7 +24,7 @@ services:
       DB_PASS: moodle
       DB_NAME: moodle
       MOODLE_VERSION: 31
-      VIRTUAL_HOST: moodle.example.com
+      VIRTUAL_HOST: localhost
     ports:
      - "80:80"
     volumes:
