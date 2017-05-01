@@ -45,20 +45,6 @@ run_moodle() {
     	VIRTUAL_PROTO=http
     fi	
 
-    if [ ! -z ${REDIS_SESSIONS} ]; then
-       pecl install redis
-       REDIS_CONF=/usr/local/etc/php/conf.d/redis.ini
-       echo 'extension=redis.so' > $REDIS_CONF
-       echo 'session.save_handler = redis' >> $REDIS_CONF
-      
-       if [ -z ${REDIS_HOST} ]; then
-            echo "Redis Sessions Activated. Using 'cache' as the server"
-            echo 'session.save_path = "tcp://cache:6379"' >> $REDIS_CONF
-       else
-            echo "session.save_path = 'tcp://${REDIS_HOST}:6379'" >> $REDIS_CONF
-       fi
-    fi
-
 
     if [ ! -e $CONF ]; then
 
@@ -126,13 +112,27 @@ run_cron() {
 update_moodle(){
     cd /var/www/html
     git config --global user.email "root@local.host"
-    git config --global user.name "gcavalcante8808"
+    git config --global user.name "root"
     maintenance_on
     echo "Starting the Update"
     git stash --include-untracked
     git pull
     git stash pop
     echo "Updates Applied."
+    maintenance_off
+}
+
+upgrade_moodle(){
+    cd /var/www/html
+    git config --global user.email "root@local.host"
+    git config --global user.name "root"
+    maintenance_on
+    echo "Starting the Upgrade"
+    git stash --include-untracked
+    git remote set-branches origin 'MOODLE_32_STABLE'
+    git checkout MOODLE_32_STABLE
+    git pull
+    git stash pop
     maintenance_off
 }
 
@@ -146,11 +146,14 @@ case "$@" in
     maintenance_off)
         maintenance_off
         ;;
+    upgrade)
+        upgrade_moodle
+        ;;
     update)
         update_moodle
         ;;
     *)
-        echo "Usage: $0 {run,maintenance_on, maintenance_off, run_cron, update}"
+        echo "Usage: $0 {run,maintenance_on, maintenance_off, run_cron, update, upgrade}"
         exit 1
         ;;
 esac
