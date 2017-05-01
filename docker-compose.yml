@@ -3,6 +3,7 @@ volumes:
   moodle-conf:
   moodledata:
   moodle-db-data:
+  cache-data:
 
 services:
   db:
@@ -16,7 +17,7 @@ services:
      - moodle-db-data:/var/lib/postgresql/data
 
   server:
-    image: gcavalcante8808/moodle
+    image: moodle-redis
     environment:
       DB_HOST: db
       DB_PORT: 5432
@@ -25,6 +26,7 @@ services:
       DB_NAME: moodle
       MOODLE_VERSION: 31
       VIRTUAL_HOST: localhost
+      REDIS_SESSIONS: 1
     ports:
      - "80:80"
     volumes:
@@ -33,3 +35,9 @@ services:
     depends_on:
      - db
 
+  cache:
+    image: redis:3.2
+    restart: always
+    volumes:
+     - cache-data:/data
+    

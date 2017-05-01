@@ -45,6 +45,21 @@ run_moodle() {
     	VIRTUAL_PROTO=http
     fi	
 
+    if [ ! -z ${REDIS_SESSIONS} ]; then
+       pecl install redis
+       REDIS_CONF=/usr/local/etc/php/conf.d/redis.ini
+       echo 'extension=redis.so' > $REDIS_CONF
+       echo 'session.save_handler = redis' >> $REDIS_CONF
+      
+       if [ -z ${REDIS_HOST} ]; then
+            echo "Redis Sessions Activated. Using 'cache' as the server"
+            echo 'session.save_path = "tcp://cache:6379"' >> $REDIS_CONF
+       else
+            echo "session.save_path = 'tcp://${REDIS_HOST}:6379'" >> $REDIS_CONF
+       fi
+    fi
+
+
     if [ ! -e $CONF ]; then
 
         if [ -z ${ADMIN_PASSWORD} ]; then

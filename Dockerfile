@@ -9,10 +9,12 @@ ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_a
 
 RUN chmod +x /usr/bin/dumb-init && \
     docker-php-ext-install pdo_pgsql mysqli pgsql zip gd xmlrpc soap intl opcache && \
+    pecl install redis && \
     a2enmod rewrite && a2enmod ssl
 
 COPY files/moodle.conf /etc/apache2/sites-available/default.conf
 COPY files/moodle.php.ini /usr/local/etc/php/conf.d/moodle.ini
+COPY files/redis.ini /usr/local/etc/php/conf.d/redis.ini
 COPY files/docker-entrypoint.sh /entrypoint
 
 WORKDIR /var/www/html
