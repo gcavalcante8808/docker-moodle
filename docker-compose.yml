@@ -17,16 +17,15 @@ services:
      - moodle-db-data:/var/lib/postgresql/data
 
   server:
-    image: moodle-redis
+    image: gcavalcante8808/moodle
     environment:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: moodle
       DB_PASS: moodle
       DB_NAME: moodle
-      MOODLE_VERSION: 31
+      MOODLE_VERSION: 32
       VIRTUAL_HOST: localhost
-      REDIS_SESSIONS: 1
     ports:
      - "80:80"
     volumes:
