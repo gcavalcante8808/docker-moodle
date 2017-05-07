@@ -2,6 +2,16 @@
 
 set -e
 
+check_branch_support () {
+    REPO_SUPPORT=$(git ls-remote --heads $1 $2)
+    if [[ ! -z "${REPO_SUPPORT// }" ]]; then
+        echo 0
+    else
+        echo 1    
+    fi    
+}
+
+
 run_moodle() {
     CONF=/var/www/html/config.php
 
@@ -55,7 +65,7 @@ run_moodle() {
         fi
 
         echo "Downloading Moodle..."
-        git clone --depth 1 --branch MOODLE_${MOODLE_VERSION}_STABLE https://github.com/moodle/moodle.git .
+        git clone --branch MOODLE_${MOODLE_VERSION}_STABLE https://github.com/moodle/moodle.git .
 
         touch $CONF
 
@@ -90,7 +100,25 @@ run_moodle() {
     echo "Database Migrated. Check the frontend to finish the installation proccess."
 
     fi
-    
+
+    if [ ! -z ${MOODLE_PLUGINS} ]; then
+
+        echo "Downloading cool plugins/themes for moodle"
+        if [ ! -d "/var/www/html/theme/essential" ]; then
+            REPO_SUPPORT=$(check_branch_support https://github.com/gjb2048/moodle-theme_essential.git MOODLE_${MOODLE_VERSION})
+            if [ "0" -eq "${REPO_SUPPORT}" ]; then
+                git clone --branch MOODLE_${MOODLE_VERSION} https://github.com/gjb2048/moodle-theme_essential.git /var/www/html/theme/essential
+            fi
+        fi
+
+        if [ ! -d "/var/www/html/course/formats/grid" ]; then
+            REPO_SUPPORT=$(check_branch_support https://github.com/gjb2048/moodle-format_grid.git MOODLE_${MOODLE_VERSION}_STABLE)
+            if [ "0" -eq "${REPO_SUPPORT}" ]; then
+                git clone --branch MOODLE_${MOODLE_VERSION}_STABLE https://github.com/gjb2048/moodle-format_grid.git /var/www/html/course/formats/grid
+            fi
+        fi
+
+    fi
     exec apache2-foreground "$@"
 }
 

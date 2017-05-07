@@ -8,6 +8,7 @@ volumes:
 services:
   db:
     image: postgres:9.6
+    restart: always
     environment:
       POSTGRES_DB: moodle
       POSTGRES_USER: moodle
@@ -18,6 +19,8 @@ services:
 
   server:
     image: gcavalcante8808/moodle
+    restart: always
+    build: .
     environment:
       DB_HOST: db
       DB_PORT: 5432
@@ -25,6 +28,7 @@ services:
       DB_PASS: moodle
       DB_NAME: moodle
       MOODLE_VERSION: 32
+      MOODLE_PLUGINS: 1
       VIRTUAL_HOST: localhost
     ports:
      - "80:80"
