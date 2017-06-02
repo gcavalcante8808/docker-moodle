@@ -30,7 +30,7 @@ You need to install and setup an postgres database before the use of the moodle 
  * DB_PASS: Password of the user (will try to use 'moodle' if not provided);
  * DB_NAME: Database Name (will try to use 'moodle' if not provided):
  * VIRTUAL_HOST: wwwroot of moodle, must match with the server access fqdn (otherwise the moodle will try to redirect you to the configured url);
- * **MOODLE_VERSION**: Moodle Version that will be installed (only numbers, no dots), if not provided assumes version 31 which corresponds to the version 3.2;
+ * **MOODLE_VERSION**: Moodle Version that will be installed (only numbers, no dots), if not provided assumes version 32 which corresponds to the version 3.2;
  * MOODLE_PLUGINS: If set (to any value) will download essential theme and grid course format (in the future will download more plugins by default).
 
 Common Operations
