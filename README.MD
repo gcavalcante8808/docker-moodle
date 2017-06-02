@@ -3,6 +3,13 @@ Moodle Docker Image
 
 This is a gcavalcante8808/moodle docker image based on official php7.0-apache image.
 
+Supported tags and respective Dockerfile Links
+----------------------------------------------
+
+ * php7.1 ([php7.1/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blob/php7.0/Dockerfile))
+ * php7.0, latest ([php7.0/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blob/master/Dockerfile))
+ * php5 ([php5/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blog/php5/Dockerfile))
+
 Simple Usage
 ------------
 
@@ -22,7 +29,7 @@ It will setUp an postgres database and a moodle container that will download and
 Usage
 -----
 
-You need to install and setup an postgres database before the use of the moodle container. After that, you'll need to provide the following information (through ENVIRONMENT variables):
+This image download and setup an moodle environment based on enironment variables that you supply in the docker command line or through docker-compose/swarm. Before you can use this container, you need to install and setup an postgres database. After that, you'll need to provide the following information (through ENVIRONMENT variables):
 
  * DB_HOST: Address of Database Host;
  * DB_PORT: Port of Postgres Installation (5432 per default if not provided);
