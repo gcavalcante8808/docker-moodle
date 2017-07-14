@@ -1,4 +1,4 @@
-from php:7.1-apache
+from php:5-apache
 RUN apt-get update && apt-get install --no-install-recommends git libpq-dev tar locales libpng-dev libjpeg-dev libxml2-dev libicu-dev libldap2-dev wget -y && \
     sed -i 's/# pt_BR.UTF-8/pt_BR.UTF8/' /etc/locale.gen && \
     locale-gen && \
