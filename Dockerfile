@@ -10,7 +10,6 @@ RUN apt-get update && \
     libicu-dev \
     libldap2-dev \
     wget \
-    postgresql-client \
     ghostscript && \
     sed -i 's/# pt_BR.UTF-8/pt_BR.UTF8/' /etc/locale.gen && \
     locale-gen && \
