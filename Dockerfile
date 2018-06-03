@@ -1,5 +1,17 @@
 from php:7.0-apache
-RUN apt-get update && apt-get install --no-install-recommends git libpq-dev tar locales libpng-dev libjpeg-dev libxml2-dev libicu-dev libldap2-dev wget postgresql-client -y && \
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y git \
+    libpq-dev \
+    tar \
+    locales \
+    libpng-dev \
+    libjpeg-dev \
+    libxml2-dev \
+    libicu-dev \
+    libldap2-dev \
+    wget \
+    postgresql-client \
+    ghostscript && \
     sed -i 's/# pt_BR.UTF-8/pt_BR.UTF8/' /etc/locale.gen && \
     locale-gen && \
     ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so && \
