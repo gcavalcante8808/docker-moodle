@@ -65,7 +65,7 @@ run_moodle() {
         fi
 
         echo "Downloading Moodle..."
-        git clone --branch MOODLE_${MOODLE_VERSION}_STABLE https://github.com/moodle/moodle.git .
+        git clone --branch MOODLE_${MOODLE_VERSION}_STABLE https://github.com/moodle/moodle.git html
 
         touch $CONF
 
