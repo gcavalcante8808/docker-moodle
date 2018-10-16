@@ -1,7 +1,6 @@
 version: '2'
 volumes:
-  moodle-conf:
-  moodledata:
+  moodle:
   moodle-db-data:
   cache-data:
 
@@ -33,8 +32,7 @@ services:
     ports:
      - "80:80"
     volumes:
-     - moodle-conf:/var/www/html
-     - moodledata:/var/www/moodledata
+     - moodle:/var/www
     depends_on:
      - db
 
