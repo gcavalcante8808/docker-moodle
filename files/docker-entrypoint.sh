@@ -55,6 +55,15 @@ run_moodle() {
     	VIRTUAL_PROTO=http
     fi	
 
+    if [[ ! -d "/var/www/html" ]]; then
+        mkdir -p /var/www/html
+	chown -R www-data:www-data /var/www/html
+    fi
+    
+    if [[ ! -d "/var/www/moodledata" ]]; then
+        mkdir -p /var/www/moodledata
+	chown -R www-data:www-data /var/www/html
+    fi
 
     if [ ! -e $CONF ]; then
 
@@ -65,7 +74,8 @@ run_moodle() {
         fi
 
         echo "Downloading Moodle..."
-        git clone --branch MOODLE_${MOODLE_VERSION}_STABLE https://github.com/moodle/moodle.git html
+	cd /var/www/html
+        git clone --branch MOODLE_${MOODLE_VERSION}_STABLE https://github.com/moodle/moodle.git .
 
         touch $CONF
 
