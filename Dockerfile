@@ -5,10 +5,11 @@ RUN apt-get update && \
     tar \
     locales \
     libpng-dev \
-    libjpeg-dev \
+    libjpeg62-turbo-dev \ 
     libxml2-dev \
     libicu-dev \
     libldap2-dev \
+    libfreetype6-dev \
     wget \
     ghostscript && \
     sed -i 's/# pt_BR.UTF-8/pt_BR.UTF8/' /etc/locale.gen && \
@@ -23,6 +24,7 @@ COPY files/install-composer.sh /
 
 RUN chmod +x /usr/bin/dumb-init && \
     bash /install-composer.sh && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include --with-png-dir=/usr/include && \
     docker-php-ext-install pdo_pgsql mysqli pgsql zip gd xmlrpc soap intl opcache ldap json && \
     pecl install redis && \
     a2enmod rewrite && a2enmod ssl
