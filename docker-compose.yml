@@ -17,7 +17,7 @@ services:
      - moodle-db-data:/var/lib/postgresql/data
 
   server:
-    image: gcavalcante8808/moodle:php7.0
+    image: gcavalcante8808/moodle:php7.1
     restart: always
     build: .
     environment:

@@ -1,4 +1,4 @@
-from php:7.0-apache
+from php:7.1-apache
 RUN apt-get update && \
     apt-get install --no-install-recommends -y git \
     libpq-dev \
