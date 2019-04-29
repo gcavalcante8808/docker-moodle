@@ -6,9 +6,9 @@ This is a gcavalcante8808/moodle docker image based on official php7.0-apache im
 Supported tags and respective Dockerfile Links
 ----------------------------------------------
 
- * php7.1 ([php7.1/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blob/php7.0/Dockerfile))
- * php7.0, latest ([php7.0/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blob/master/Dockerfile))
- * php5 ([php5/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blog/php5/Dockerfile))
+ * (DEFAULT) php7.1 ([php7.1/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blob/php7.0/Dockerfile))
+ * (DEPRECATED) php7.0, latest ([php7.0/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blob/master/Dockerfile))
+ * (DEPRECATED) php5 ([php5/Dockerfile](https://github.com/gcavalcante8808/docker-moodle/blog/php5/Dockerfile))
 
 Simple Usage
 ------------
